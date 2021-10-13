@@ -11,7 +11,8 @@
     acme_directory: "{{ acme_use_live_directory | ternary(acme_live_directory, acme_staging_directory) }}"
 
 - name: create directories for acme certificates
-  delegate_to: localhost
+# TODO: why is it that the directories should be created on localhost?
+#   delegate_to: localhost
   file:
     path: "{{ item }}"
     state: directory
@@ -19,6 +20,7 @@
   loop:
     - "{{ acme_conf_dir }}"
     - "{{ acme_cert_dir }}"
+  become: yes
 
 - name: "select provider {{ acme_challenge_provider }}"
   set_fact:
