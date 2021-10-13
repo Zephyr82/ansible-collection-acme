@@ -14,6 +14,7 @@
   when:
     - acme_domain.subject_alt_name.top_level is undefined and acme_domain.subject_alt_name.second_level is undefined
     - '"dns-01" in acme_provider_path'
+  become: true
 
 - name: Create CSR for certificate
   openssl_csr:
@@ -30,6 +31,7 @@
   when:
     - acme_domain.subject_alt_name.top_level is defined or acme_domain.subject_alt_name.second_level is defined
     - '"dns-01" in acme_provider_path'
+  become: true
 
 - name: Create CSR for certificate
   openssl_csr:
@@ -45,3 +47,4 @@
     subject_alt_name: "DNS:{{ acme_domain.subject_alt_name | join(',DNS:') }}"
   when:
     - '"http-01" in acme_provider_path'
+  become: true

@@ -22,6 +22,7 @@
         - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
         - challenge['challenge_data'][item] is defined
+      become: true
 
      # validate certficate
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
@@ -40,6 +41,7 @@
         remaining_days: "{{ acme_remaining_days }}"
         data: "{{ challenge }}"
         validate_certs: "{{ acme_validate_certs | default(true) }}"
+      become: true
 
     - name: remove challenge/hash files for SAN domains from fs
       file:
@@ -50,3 +52,4 @@
         - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
         - challenge['challenge_data'][item] is defined
+      become: true

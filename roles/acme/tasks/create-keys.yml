@@ -6,7 +6,8 @@
     type: RSA
   when:
     - acme_account_key_content is not defined
-  no_log: true
+  no_log: false
+  become: true
 
 - name: create account key file from acme_account_key_content-variable
   copy:
@@ -15,14 +16,16 @@
     mode: 0400
   when:
     - acme_account_key_content is defined
-  no_log: true
+  #no_log: true
+  become: true
 
 - name: Create RSA key to be used for certificate
   openssl_privatekey:
     path: "{{ acme_private_key_path }}"
   when:
     - acme_private_key_content is not defined
-  no_log: true
+  #no_log: true
+  become: true
 
 - name: create private key file from acme_private_key_content-variable
   copy:
@@ -31,4 +34,5 @@
     mode: 0400
   when:
     - acme_private_key_content is defined
-  no_log: true
+  #no_log: true
+  become: true
