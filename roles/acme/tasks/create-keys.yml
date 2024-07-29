@@ -22,6 +22,8 @@
 - name: Create RSA key to be used for certificate
   openssl_privatekey:
     path: "{{ acme_private_key_path }}"
+    owner: "{{ acme_private_key_owner }}"
+    group: "{{ acme_private_key_group }}"
   when:
     - acme_private_key_content is not defined
   #no_log: true
@@ -32,6 +34,8 @@
     dest: "{{ acme_private_key_path }}"
     content: "{{ acme_private_key_content }}"
     mode: 0400
+    owner: "{{ acme_private_key_owner }}"
+    group: "{{ acme_private_key_group }}"
   when:
     - acme_private_key_content is defined
   #no_log: true

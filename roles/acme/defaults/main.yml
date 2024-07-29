@@ -1,6 +1,6 @@
 ---
 ### global
-acme_conf_dir: "{{ lookup('env','HOME') }}/letsencrypt"
+acme_conf_dir: "{{ lookup('env', 'HOME') }}/letsencrypt"
 acme_cert_dir: "{{ acme_conf_dir }}/certs"
 acme_prerequisites_packagemanager: "yum"
 
@@ -15,6 +15,8 @@ acme_pfx_cert_path: "{{ acme_cert_dir }}/{{ acme_domain.certificate_name }}.pfx"
 acme_intermediate_path: "{{ acme_cert_dir }}/{{ acme_domain.certificate_name }}_intermediate.pem"
 acme_fullchain_path: "{{ acme_cert_dir }}/{{ acme_domain.certificate_name }}_fullchain.pem"
 acme_private_key_path: "{{ acme_cert_dir }}/{{ acme_domain.certificate_name }}.key"
+acme_private_key_owner: root
+acme_private_key_group: root
 acme_remaining_days: "30"
 
 ### provider specific config
