@@ -6,6 +6,7 @@
     mode: 0755
     owner: "{{ acme_local_validation_path_file_owner | default(omit) }}"
     group: "{{ acme_local_validation_path_file_group | default(omit) }}"
+  become: true
 
 - name: validate challenge only if it is created or changed
   when: challenge is changed
